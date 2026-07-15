@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1",
+  "run_id": "example-full-workflow",
+  "created_at": "2026-07-15T00:00:00Z",
+  "mode": "full_workflow",
+  "source": {
+    "title": "AI Agent 工具基础设施市场报告",
+    "path_or_url": "user-provided://report.pdf",
+    "source_type": "report",
+    "sensitivity": "private"
+  },
+  "workflow_decision": "quick_read_now",
+  "content_quality": {
+    "status": "evaluated",
+    "slop_risk": "medium",
+    "input_coverage": "sampled_content",
+    "inspected_sections": ["目录", "修订摘要", "机会章节", "最终判断"],
+    "signals": {
+      "concrete_takeaway": {"rating": "strong", "evidence": "报告列出赛道、公司、协议和机会分类。", "confidence": "medium"},
+      "source_specificity": {"rating": "mixed", "evidence": "部分来源可定位，但融资和预测仍需一手核验。", "confidence": "medium"},
+      "author_footprint": {"rating": "unknown", "evidence": "增强版报告的原始作者和编辑过程未完全确认。", "confidence": "low"},
+      "cognitive_progress": {"rating": "strong", "evidence": "目录和机会章节能推进对市场结构的理解。", "confidence": "medium"}
+    },
+    "basis": "报告有具体结构和概念收获，但来源质量和部分市场事实需要后续核验。"
+  },
+  "attention_gate": {
+    "status": "evaluated",
+    "triage_decision": "quick_read_now",
+    "basis": "当前没有明确投资或创业决策，先花 10-15 分钟看目录、修订摘要、机会章节和最终判断即可。",
+    "input_coverage": "sampled_sections",
+    "inspected_sections": ["标题页", "目录", "修订摘要", "最终判断"],
+    "fit_target": "个人阅读队列",
+    "expected_deep_read_cost": "high",
+    "expected_decision_impact": "medium",
+    "expected_attention_saved": "high",
+    "confidence": "medium",
+    "uncertainty": "未核验全文融资、估值和预测事实。",
+    "not_inferred": "不把报告预测当成事实，也不因内容风险中等就直接跳过。",
+    "revisit_trigger": "出现具体 Agent 基础设施选型、创业或投资决策时。",
+    "recommended_next_gate": "先完成 10-15 分钟有限筛读，再决定是否深读。"
+  },
+  "uncertainty": "内容风险和注意力决策都基于有限抽样，不能替代事实核验。",
+  "not_inferred": "不推断报告一定由 AI 生成，不推断它对任何具体项目必然有价值。",
+  "recommended_next_gate": "按 attention_gate 的有限筛读范围继续，不自动进入深度研究。",
+  "writeback_status": "none"
+}
