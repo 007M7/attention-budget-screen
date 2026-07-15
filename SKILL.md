@@ -1,4 +1,4 @@
----
+﻿---
 name: attention-budget-screen
 description: Run a bounded source workflow that screens content for low-information or mass-production risk (Slop) and then decides how much attention the source deserves. Use for articles, PDFs, reports, books, posts, transcripts, or AI-assisted content when the user asks whether it is worth reading, whether it is suspiciously slop, or both. Supports full_workflow, content_quality_only, and attention_only modes. Do not use as an AI detector, fact checker, author-intent judge, or automatic content filter.
 ---
