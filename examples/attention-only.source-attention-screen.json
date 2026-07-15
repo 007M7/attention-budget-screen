@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1",
+  "run_id": "example-attention-only",
+  "created_at": "2026-07-15T00:00:00Z",
+  "mode": "attention_only",
+  "source": {
+    "title": "一份长篇研究报告",
+    "path_or_url": "user-provided://report.pdf",
+    "source_type": "pdf",
+    "sensitivity": "private"
+  },
+  "workflow_decision": "pending_context",
+  "content_quality": {
+    "status": "not_run",
+    "slop_risk": "not_run",
+    "input_coverage": "metadata_only",
+    "inspected_sections": [],
+    "signals": {
+      "concrete_takeaway": {"rating": "not_run", "evidence": "未运行内容阶段。", "confidence": "high"},
+      "source_specificity": {"rating": "not_run", "evidence": "未运行内容阶段。", "confidence": "high"},
+      "author_footprint": {"rating": "not_run", "evidence": "未运行内容阶段。", "confidence": "high"},
+      "cognitive_progress": {"rating": "not_run", "evidence": "未运行内容阶段。", "confidence": "high"}
+    },
+    "basis": "用户只询问注意力决策，内容阶段未运行。"
+  },
+  "attention_gate": {
+    "status": "indeterminate",
+    "triage_decision": "pending_context",
+    "basis": "只有文件和页数，没有当前项目目标、决策影响或注意力约束。",
+    "input_coverage": "metadata_only",
+    "inspected_sections": [],
+    "fit_target": "unknown",
+    "expected_deep_read_cost": "high",
+    "expected_decision_impact": "unknown",
+    "expected_attention_saved": "unknown",
+    "confidence": "low",
+    "uncertainty": "不知道用户是个人阅读、项目研究、投资还是采购决策。",
+    "not_inferred": "不推断报告与任何项目相关，也不推断它是 Slop。",
+    "revisit_trigger": "用户补充阅读目标和可投入时间。",
+    "recommended_next_gate": "补充当前目标、时间预算和想改变的决定。"
+  },
+  "uncertainty": "未运行内容质量阶段，注意力上下文也不足。",
+  "not_inferred": "不判断内容质量、事实真伪或项目价值。",
+  "recommended_next_gate": "先补充注意力决策上下文。",
+  "writeback_status": "none"
+}
