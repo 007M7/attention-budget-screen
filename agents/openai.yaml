@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Attention Budget Screen"
+  short_description: "在 Slop 信息污染中先筛查内容，再做原始注意力预算决策"
+  default_prompt: "请使用 $attention-budget-screen 先检查内容质量风险，再判断它是否值得占用我现在的注意力。"
