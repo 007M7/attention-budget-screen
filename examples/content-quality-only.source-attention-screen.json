@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1",
+  "run_id": "example-quality-only",
+  "created_at": "2026-07-15T00:00:00Z",
+  "mode": "content_quality_only",
+  "source": {
+    "title": "批量情绪鸡汤短文",
+    "path_or_url": "user-provided://posts",
+    "source_type": "post",
+    "sensitivity": "public"
+  },
+  "workflow_decision": "quality_screen_only",
+  "content_quality": {
+    "status": "evaluated",
+    "slop_risk": "high",
+    "input_coverage": "sampled_content",
+    "inspected_sections": ["sample_batch", "repeated_openings", "repeated_closings"],
+    "signals": {
+      "concrete_takeaway": {"rating": "weak", "evidence": "无法复述具体事实、案例或可检验观点。", "confidence": "high"},
+      "source_specificity": {"rating": "weak", "evidence": "没有具体人物、研究、数据或链接。", "confidence": "high"},
+      "author_footprint": {"rating": "weak", "evidence": "替换账号后基本可以原样发布。", "confidence": "medium"},
+      "cognitive_progress": {"rating": "weak", "evidence": "主要刺激感动和焦虑，没有明显认知增量。", "confidence": "medium"}
+    },
+    "basis": "四个信号中三个以上偏弱，样本存在较高的疑似低信息量批量生产风险。"
+  },
+  "attention_gate": {
+    "status": "not_run",
+    "triage_decision": "not_run",
+    "basis": "用户只请求内容质量筛查。",
+    "input_coverage": "metadata_only",
+    "inspected_sections": [],
+    "fit_target": "未运行",
+    "expected_deep_read_cost": "unknown",
+    "expected_decision_impact": "unknown",
+    "expected_attention_saved": "unknown",
+    "confidence": "low",
+    "uncertainty": "未运行注意力阶段。",
+    "not_inferred": "不推断用户是否应该阅读这些内容。",
+    "revisit_trigger": "用户明确询问是否值得阅读时。",
+    "recommended_next_gate": "发布前人工补充具体经历、来源和可执行观点。"
+  },
+  "uncertainty": "这是内容质量启发式，不是 AI 检测或事实判断。",
+  "not_inferred": "不推断内容一定由 AI 生成，也不判断作者动机。",
+  "recommended_next_gate": "先人工改写或补充来源，再决定是否发布。",
+  "writeback_status": "none"
+}
