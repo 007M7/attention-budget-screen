@@ -70,7 +70,56 @@ Do not use this Skill for fact verification, medical/legal/academic certificatio
 
 ## Output
 
-Return the unified v0.1 structure in `references/output-templates.md`:
+### 默认用户展示层
+
+除非用户明确要求 JSON、结构化记录、评测结果或调试信息，否则必须先用中文给出可直接阅读的结论，不要把机器字段直接展示给用户，也不要以 `workflow_decision`、`mode`、`content_quality`、`attention_gate` 或 `writeback_status` 开头。
+
+默认按以下顺序输出：
+
+```text
+先说结论：
+阅读建议：现在快速筛读 / 现在值得深读 / 稍后再看 / 只作参考 / 现在不投入 / 信息不足
+内容风险：低 / 中等 / 较高 / 暂无法判断
+
+你现在怎么做：
+用一句话说明下一步动作和范围。
+
+为什么：
+用一句话说明内容信号与注意力决策的关系。
+
+四个内容信号：
+- 具体收获：较强 / 一般 / 较弱 / 暂无法判断 —— 中文证据
+- 来源具体性：较强 / 一般 / 较弱 / 暂无法判断 —— 中文证据
+- 作者痕迹：较强 / 一般 / 较弱 / 暂无法判断 —— 中文证据
+- 认知推进：较强 / 一般 / 较弱 / 暂无法判断 —— 中文证据
+
+注意力判断：
+说明实际查看范围、当前目标、主要不确定性和下一道关口。
+
+边界：
+不把内容风险当成 AI 检测、事实核验或作者动机结论。
+```
+
+字段翻译规则：
+
+- `quick_read_now` 写成“现在快速筛读”；
+- `read_deep_now` 写成“现在值得深读”；
+- `project_relevant_but_not_now` 写成“与项目相关，但先放到后面”；
+- `reference_only` 写成“只作参考”；
+- `defer_or_monitor` 写成“稍后再看”；
+- `do_not_invest_further_now` 写成“现在不投入”；
+- `pending_context` 写成“信息不足，先补充目标”；
+- `quality_screen_only` 写成“只完成内容风险筛查”；
+- `low`、`medium`、`high`、`indeterminate` 分别写成“低”“中等”“较高”“暂无法判断”；
+- `strong`、`mixed`、`weak`、`unknown` 分别写成“较强”“一般”“较弱”“暂无法判断”。
+
+技术名称可以保留英文原名，例如 HMS、LongMemEval、LoCoMo、GitHub 和 URL；字段名、决策标签、风险等级和解释必须优先使用中文。
+
+默认不要展示完整 inspected sections 数组、confidence 字段或 `writeback_status`。将它们转换成“已查看范围”“判断把握”“未写入任何系统”等自然语言。用户明确要求机器记录时，再在中文结论之后展示结构化字段。
+
+### 机器记录层
+
+需要生成或验证结构化记录时，使用 `references/output-templates.md` 中的统一 v0.1 结构：
 
 ```text
 workflow_decision:
