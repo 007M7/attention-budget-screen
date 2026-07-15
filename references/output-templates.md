@@ -1,4 +1,4 @@
-# Attention Budget Screen 输出契约 v0.1
+﻿# Attention Budget Screen 输出契约 v0.1
 
 ```json
 {
