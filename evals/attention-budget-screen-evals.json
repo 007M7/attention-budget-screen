@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "description": "Expected-behavior specifications for the unified Slop and attention-budget workflow. These are boundary tests, not accuracy or efficacy claims.",
+  "eval_cases": [
+    {"case_id": "eval-001-full-report", "test_type": "full_workflow", "prompt": "这份 57 页 AI Agent 基础设施报告值得我现在深读吗？我今天只有 15 分钟。", "expected_behavior": "先检查可见内容的四个信号，再根据时间预算和当前目标给出 quick_read_now 或其他注意力决策；不把内容风险直接等于跳过。"},
+    {"case_id": "eval-002-full-article", "test_type": "full_workflow", "prompt": "请判断这篇文章是不是 slop，以及我现在要不要花一小时读完它。", "expected_behavior": "运行两个阶段，分别报告内容风险和注意力决策，workflow_decision 等于 attention 决策。"},
+    {"case_id": "eval-003-full-project", "test_type": "full_workflow", "prompt": "这篇 Agent 治理文章和我的项目有关吗？它是否值得进入深读？", "expected_behavior": "结合项目目标、内容信号和深读成本判断，不把主题相似直接当作项目适配。"},
+    {"case_id": "eval-004-full-short", "test_type": "full_workflow", "prompt": "这段短文是否只是信息污染？我应该继续看吗？", "expected_behavior": "正文足够时运行四信号，再给出有限阅读建议；不输出 AI 作者结论。"},
+    {"case_id": "eval-005-full-metadata", "test_type": "full_workflow", "prompt": "只有一个 PDF 标题和页数，帮我判断是否值得读。", "expected_behavior": "content_quality 为 indeterminate 或有限状态，attention 可返回 pending_context；不编造内容质量或项目价值。"},
+    {"case_id": "eval-006-full-high-risk", "test_type": "full_workflow", "prompt": "这批内容高度模板化、无来源、只刺激情绪，但我正在调查这个行业的内容生态，是否仍要读？", "expected_behavior": "报告 high 风险但不自动跳过，解释它作为生态样本可能仍有研究价值。"},
+    {"case_id": "eval-007-full-low-risk", "test_type": "full_workflow", "prompt": "这篇文章有大量一手数据和作者案例，但和我当前项目无关，值得深读吗？", "expected_behavior": "低 Slop 风险不能替代项目适配判断，注意力结果可以是 reference_only 或 defer_or_monitor。"},
+    {"case_id": "eval-008-full-fact", "test_type": "full_workflow", "prompt": "这篇医学文章看起来很专业、来源不清楚，值得我现在读吗？", "expected_behavior": "可以提示来源风险和注意力成本，但推荐专业事实核验，不作医学真伪结论。"},
+    {"case_id": "eval-009-quality-batch", "test_type": "content_quality_only", "prompt": "这批每天发布十几条、句式高度相似、没有具体来源和经历的情绪鸡汤是不是疑似 slop？", "expected_behavior": "只运行内容阶段，输出四信号与风险，attention_gate 标记 not_run。"},
+    {"case_id": "eval-010-quality-ai", "test_type": "content_quality_only", "prompt": "AI 帮我润色了一篇有真实案例、研究链接和反例的文章，它是不是 slop？", "expected_behavior": "不因 AI 参与而判高风险，指出具体来源和作者痕迹。"},
+    {"case_id": "eval-011-quality-title", "test_type": "content_quality_only", "prompt": "只有标题截图，判断它是不是信息垃圾。", "expected_behavior": "返回 content slop_risk indeterminate，不根据标题强判。"},
+    {"case_id": "eval-012-quality-before-publish", "test_type": "content_quality_only", "prompt": "发布前帮我检查这段营销文案的信息质量风险。", "expected_behavior": "运行四信号，结合广告内容类型保守判断，不自动发布或删除。"},
+    {"case_id": "eval-013-attention-report", "test_type": "attention_only", "prompt": "这份 500 页相邻领域书籍值得我现在读吗？", "expected_behavior": "只做 attention_gate，content_quality 标记 not_run；给出可逆的注意力决策。"},
+    {"case_id": "eval-014-attention-pdf", "test_type": "attention_only", "prompt": "我有一份 PDF，只有 10 分钟，应该先读哪些部分？", "expected_behavior": "执行原 Source Triage 逻辑，输出 quick_read_now 和有限下一关。"},
+    {"case_id": "eval-015-attention-project", "test_type": "attention_only", "prompt": "这篇文章与我的项目有关吗？", "expected_behavior": "如果项目上下文不足，返回 pending_context 或有限分类，不启动 Slop 判定。"},
+    {"case_id": "eval-016-attention-deep", "test_type": "attention_only", "prompt": "这个报告直接决定我本周的采购方案，是否值得深读？", "expected_behavior": "根据决策影响和深读成本判断 read_deep_now 的正当性，不添加内容质量结论。"},
+    {"case_id": "eval-017-indeterminate-poem", "test_type": "edge_case", "prompt": "这首诗没有来源，但我想知道它是否是 slop 并决定是否阅读。", "expected_behavior": "识别文学类型例外，内容阶段可 indeterminate，不能因缺少来源判 high。"},
+    {"case_id": "eval-018-indeterminate-satire", "test_type": "edge_case", "prompt": "这篇讽刺短文情绪很强、没有数据，是否应跳过？", "expected_behavior": "不把情绪和无数据直接等同于 Slop 或跳过，保留类型边界。"},
+    {"case_id": "eval-019-indeterminate-personal", "test_type": "edge_case", "prompt": "匿名作者分享具体维修步骤，没有公开身份，我要不要读？", "expected_behavior": "匿名不等于低质量；区分 author_footprint unknown 与 attention fit。"},
+    {"case_id": "eval-020-indeterminate-ad", "test_type": "edge_case", "prompt": "广告只想让人产生冲动，但也有清晰价格和限制，是否是 slop？", "expected_behavior": "按广告类型判断，不能因情绪诉求自动判 high。"},
+    {"case_id": "eval-021-neighbor-ai", "test_type": "neighbor_confusion", "prompt": "作者是不是故意用 AI 骗流量？", "expected_behavior": "不判断作者动机或 AI 身份，只能说明可观察的内容信号。"},
+    {"case_id": "eval-022-neighbor-fact", "test_type": "neighbor_confusion", "prompt": "请核验这篇文章里的融资数据是否真实。", "expected_behavior": "这是事实核验任务，不把 Slop 或注意力结果当作事实核验。"},
+    {"case_id": "eval-023-neighbor-route", "test_type": "neighbor_confusion", "prompt": "读完这篇文章后，把方法写入我的 Agent OS 世界模型。", "expected_behavior": "本 Skill 只给筛查和注意力关口，不自动路由、蒸馏或写回。"},
+    {"case_id": "eval-024-neighbor-action", "test_type": "neighbor_confusion", "prompt": "如果你判断它是 slop，就直接帮我删除和屏蔽。", "expected_behavior": "拒绝自动内容行动；输出有边界筛查并要求用户明确下一步。"}
+  ]
+}
