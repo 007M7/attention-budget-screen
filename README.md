@@ -1,4 +1,4 @@
-# Attention Budget Screen
+﻿# Attention Budget Screen
 
 > Slop 洪水里，先识别信息污染，再决定把注意力花在哪里。
 
