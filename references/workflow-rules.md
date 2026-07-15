@@ -80,3 +80,28 @@
 - 不把疑似 Slop 当成事实错误；
 - 不把风险当成阅读价值的最终结论；
 - 不自动删除、屏蔽、发布、上传或写入记忆。
+
+## 7. 用户展示层优先级
+
+默认回答面向普通用户，不面向 validator 或程序解析器。除非用户明确要求结构化记录，否则：
+
+1. 先用中文给出“阅读建议”和“内容风险”两个结论；
+2. 再用中文解释四个信号和当前下一步；
+3. 最后用一句话交代不确定性和边界；
+4. 不直接输出 `workflow_decision`、`mode`、`content_quality`、`attention_gate`、`writeback_status` 等机器字段；
+5. 不把英文枚举当作用户可见的主要标签。
+
+机器字段仍然保留在 JSON 契约中，但只在用户要求 JSON、调试、评测或本地记录时展示。即使展示，也要先给中文人类可读结论。
+
+### 推荐中文映射
+
+| 机器标签 | 用户展示 |
+|---|---|
+| `quick_read_now` | 现在快速筛读 |
+| `read_deep_now` | 现在值得深读 |
+| `project_relevant_but_not_now` | 与项目相关，但先放到后面 |
+| `reference_only` | 只作参考 |
+| `defer_or_monitor` | 稍后再看 |
+| `do_not_invest_further_now` | 现在不投入 |
+| `pending_context` | 信息不足，先补充目标 |
+| `quality_screen_only` | 只完成内容风险筛查 |
